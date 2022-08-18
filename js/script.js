@@ -27,6 +27,11 @@ formCoches.addEventListener("submit",(e)=>{
    autos.push(listaObj);
    localStorage.setItem("autos", JSON.stringify(autos)); 
    formCoches.reset();
+   Swal.fire(
+    'Coche Agregado',
+    'El vehiculo aparecera en el catalogo!',
+    'success'
+  )
 })
 
 botonLista.addEventListener("click",()=>{
@@ -38,11 +43,13 @@ botonLista.addEventListener("click",()=>{
            <div class="card-header"><h2>${lista.nombre}</h2></div>
            <div class="card-body">
            <p class="card-text">${lista.marca}</p>
-           <button class="btn btn-info" >${lista.precio}</button><br><br>
+           <button class="btn btn-dark">$${lista.precio}</button><br><br>
            <button class="btn btn-success" >Borrar Automovil</button>
            </div>
       </div>
       `
+      
+      
     });
 
       listasStorage.forEach((lista, indice) =>{
@@ -50,9 +57,22 @@ botonLista.addEventListener("click",()=>{
             document.getElementById(`lista${indice}`).remove();
             autos?.splice(indice,1) ?? indice,0;
             localStorage.setItem("autos", JSON.stringify(autos));
-            
+
+            Toastify({
+                text: "Vehiculo eliminado del catalogo",
+                duration: 3000,
+                destination: "",
+                newWindow: true,
+                close: true,
+                gravity: "top", 
+                position: "center",
+                stopOnFocus: true, 
+                style: {
+                  background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
+                },
+              }).showToast();
         })
      
     })
-
+          
 });
